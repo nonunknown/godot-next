@@ -24,6 +24,7 @@ extends Reference
 #	- Get flag names:
 #		bf.get_active_keys() # Returns an array of active keys.
 #		bf.get_keys() # Returns an array of all flag keys.
+#		bf.get_active_keys_sum() # Returns the sum value of active keys, example: 1001 will return 9 
 #	- Convert to PropertyInfo dict
 #		bf.to_pinfo_dict("property_name") # Returns a dictionary with export structure.
 
@@ -100,7 +101,12 @@ func get_active_keys() -> Array:
 			out.append(a_flag)
 	return out
 
-
+func get_active_keys_sum() -> int:
+	var value:int = 0
+	for a_flag in _enum:
+		if check(_enum[a_flag]):
+			value += _get(a_flag)
+	return value
 func get_keys() -> Array:
 	return _enum.keys()
 
